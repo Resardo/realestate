@@ -9,10 +9,11 @@
     <div class="col-12">There are currently no prona active</div>
       {% else %}
         <div class="album py-5 bg-light"> 
-          {% for property in properties %}  
+            
          <div class="container">
 
         <div class="row">
+          {% for property in properties %}
           <div class="col-md-4 p-0">
             <div class="card mb-4 box-shadow row">
               {% for image in property.property_image.all %}
