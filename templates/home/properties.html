@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+{% extends '../base.html' %}
+{%load static%}
+{% block title%}Home{%endblock%}
+{% block css %}<link rel="stylesheet" href="{% static 'core/css/properties.css' %}">{% endblock %}
+{%block content%}
+<div class="container pt-4"> 
+    {% if not properties %}
+    <div class="col-12">There are currently no prona active</div>
+      {% else %}
+        <div class="album py-5 bg-light"> 
+          {% for property in properties %}  
+         <div class="container">
+
+        <div class="row">
+          <div class="col-md-4 p-0">
+            <div class="card mb-4 box-shadow row">
+              {% for image in property.property_image.all %}
+              {% if image.is_feature%}
+              <img class="card-img-top img-fluid" src="{{ image.image.url }}" alt="{{ image.image.alt_text }}">
+              {% endif %}
+              {% endfor %}
+              <a class="text-dark text-decoration-none" href="{{ property.get_absolute_url }}">
+                <div class="card-body row">
+                  <div class="ps-3">
+                   <p class="card-text h4 pt-3">{{  property.title|slice:":50" }}</p>
+                  </div>
+                  <div class="ps-2 pt-2">
+                    <i class="fa-solid fa-user"></i><small class="card-text h6 ">   agjenti</small>
+                   </div>
+                  <div class="p-2">
+                    <i class="fa-solid fa-location-dot"></i><small class="h6 text-muted">  {{property.address_line}}</small>
+                  </div>
+                  <div class="p-2">
+                    <div class="float-end pe-5">
+                      <i class="fa-solid fa-tag"></i><small class="h5 text-muted">  {{property.price}} $</small>
+                    </div>
+                  </div>
+
+                    <div class="card-footer row">
+                      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 FutureInfo col-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-aspect-ratio" viewBox="0 0 16 16">
+                          <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h13A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5v-9zM1.5 3a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z"/>
+                          <path d="M2 4.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H3v2.5a.5.5 0 0 1-1 0v-3zm12 7a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H13V8.5a.5.5 0 0 1 1 0v3z"/>
+                        </svg>
+                      <small>{{property.area}} m<sup>2</sup></small>
+                      </div>
+
+                      {% if property.apartment.room_num or property.apartment.room_num == 0 %}
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 FutureInfo col-4">
+                          <i class="fa-solid fa-bed"></i>   
+                          <small>{{ property.apartment.room_num }}</small>
+                        </div>
+                      
+                      {% elif property.villa.room_num or property.villa.room_num == 0 %}
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 FutureInfo col-4">
+                          <i class="fa-solid fa-bed"></i>   
+                          <small>{{ property.villa.room_num }}</small>
+                        </div>
+                      {% else %}
+                      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 FutureInfo col-4">
+                        <i class="fa-solid fa-bed"></i>   
+                        <small>--</small>
+                      </div>
+                      {% endif %}
+                      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 FutureInfo col-4" style="text-align: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                          <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                          <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                        </svg> <small>{{ property.views }}</small>
+                      </div>
+                      {% if property.apartment.bath_num == 0 or property.apartment.bath_num%}
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 FutureInfo col-4">
+                          <i class="fa-solid fa-bath"></i>  
+                          <small>{{ property.apartment.bath_num }}</small>
+                        </div>
+
+                      {% elif property.store.bath_num or property.store.bath_num == 0 %}
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 FutureInfo col-4">
+                          <i class="fa-solid fa-bath"></i>  
+                          <small>{{ property.store.bath_num }}</small>
+                        </div>
+                      {% elif property.villa.bath_num or property.villa.bath_num == 0 %}
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 FutureInfo col-4">
+                          <i class="fa-solid fa-bath"></i>  
+                          <small>{{ property.villa.bath_num }}</small>
+                        </div>
+                      {% else %}
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 FutureInfo col-4">
+                          <i class="fa-solid fa-bath"></i>  
+                          <small>--</small>
+                        </div>
+                      {% endif%}
+                      
+                      {% if property.apartment.floor or property.apartment.floor == 0 %}
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 FutureInfo col-4">
+                          <i class="fa-solid fa-arrow-right-to-city"></i>
+                          <small>{{ property.apartment.floor }}</small>
+                        </div>
+                      {% elif property.garage.floor or property.garage.floor == 0%}
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 FutureInfo col-4">
+                          <i class="fa-solid fa-arrow-right-to-city"></i>
+                          <small>{{ property.garage.floor }}</small>
+                        </div>
+                      {% elif  property.store.floor or  property.store.floor == 0%}
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 FutureInfo col-4">
+                          <i class="fa-solid fa-arrow-right-to-city"></i>
+                          <small>{{ property.store.floor }}</small>
+                        </div>
+                      {% else %}
+                      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 FutureInfo col-4">
+                        <i class="fa-solid fa-arrow-right-to-city"></i>
+                        <small>--</small>
+                      </div>
+                      {% endif %}
+                      
+                      </div>
+               </div>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+        {% endif %}
+
+    {%endblock %}
+   
