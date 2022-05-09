@@ -67,6 +67,7 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 </div>
 
 
+    
 
     <div class="container-fluid pt-4 my-5 "> 
       
@@ -93,7 +94,9 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
             {% endfor %}
           </div>
         </div> -->
-          
+        <div class="container">
+        <h1>Most viewed</h1>
+      </div>
 
           <div class="container-fluid pt-4 my-5 "> 
             {% if not properties %}
@@ -124,6 +127,41 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
               
                 {% endif %}
           </div>
+
+              <hr class="featurette-divider">
+              <div class="container">
+              <h1>Latest added</h1>
+            </div>
+
+              <div class="container-fluid pt-4 my-5 "> 
+                {% if not properties %}
+                <div class="col-12">There are currently no prona active</div>
+                  {% else %}
+                    <div class=" owl-carousel owl-theme ">
+                      {% for property in lastAdded|slice:":10" %}
+                      
+                      <div class="col ">
+                        <div class="card border-0">
+                          {% for image in property.property_image.all %}
+                          {% if image.is_feature%}
+                          <img class="img-fluid" alt="Responsive image" src="{{ image.image.url }}"
+                            alt="{{ image.image.alt_text }}">
+                          {% endif %}
+                          {% endfor %}
+                          <div class="card-body px-0">
+                            <p class="card-text">
+                              <a class="text-dark text-decoration-none"
+                                href="{{ property.get_absolute_url }}">{{ property.title|slice:":50" }}...</a>
+                            </p>
+                            <div class="fw-bold">{{property.price}} €</div>
+                          </div>
+                        </div>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  
+                    {% endif %}
+              </div>
               <hr class="featurette-divider">
 
     <div class="container marketing my-5 ">

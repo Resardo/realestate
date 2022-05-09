@@ -11,16 +11,17 @@ from .models import Apartment, Garage, Land, Store, Villa, Property
 def properties_all(request):
     properties = Property.objects.prefetch_related("property_image").filter(is_active=True)
     topProperties=Property.objects.prefetch_related("property_image").all().order_by('-views')
+    lastAdded=Property.objects.prefetch_related("property_image").all().order_by('-created_at')
     print(topProperties)
-    return render(request, "home/index.html", {"properties" : properties, "topProperties" : topProperties})
+    return render(request, "home/index.html", {"properties" : properties, "topProperties" : topProperties, "lastAdded" : lastAdded})
 
 def properties_list(request):
     properties = Property.objects.prefetch_related("property_image").filter(is_active=True)
     
-     properties_paginator = Paginator(properties, 2)
-     page_num= request.GET.get('page')
-     page = properties_paginator.get_page(page_num)
-     num_pages = "a" * page.paginator.num_pages
+    properties_paginator = Paginator(properties, 2)
+    page_num= request.GET.get('page')
+    page = properties_paginator.get_page(page_num)
+    num_pages = "a" * page.paginator.num_pages
    
     
     return render(request, "home/properties.html", {"properties" : properties, "page" : page, "num_pages" : num_pages})
