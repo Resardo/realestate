@@ -17,17 +17,17 @@ def properties_all(request):
 def properties_list(request):
     properties = Property.objects.prefetch_related("property_image").filter(is_active=True)
     
-    # properties_paginator = Paginator(properties, 2)
-    # page_num= request.GET.get('page')
-    # page = properties_paginator.get_page(page_num)
-    # num_pages = "a" * page.paginator.num_pages
-    page=paginator(request,properties=properties)
+     properties_paginator = Paginator(properties, 2)
+     page_num= request.GET.get('page')
+     page = properties_paginator.get_page(page_num)
+     num_pages = "a" * page.paginator.num_pages
+   
     
-    return render(request, "home/properties.html", {"page" : page, properties : "properties"})
+    return render(request, "home/properties.html", {"properties" : properties, "page" : page, "num_pages" : num_pages})
 
 def land_all(request):
     properties = Land.objects.prefetch_related("property_image").filter(is_active=True)
-    properties_paginator = Paginator(property, 2)
+    properties_paginator = Paginator(properties, 2)
     page_num= request.GET.get('page')
     page = properties_paginator.get_page(page_num)
     num_pages = "a" * page.paginator.num_pages
