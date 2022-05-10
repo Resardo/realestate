@@ -1,8 +1,8 @@
 from tkinter import CASCADE
 from django.db import models
 from django.urls import reverse
-from django.contrib.auth.models import User
-
+from agent.models import User
+from django.conf import settings
 
 ACTION_OPTION = (
         ("Sale", "Shitje"),
@@ -49,9 +49,9 @@ class District(models.Model):
 
 
 class Property(models.Model):
+
     district_id = models.ForeignKey(District, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=255, unique=True)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='property_creator')
     title = models.TextField(verbose_name="Titulli", help_text="Vendos titullin e njoftimit", max_length=500)
     description = models.TextField(verbose_name="Pershkrimi", help_text="Vendos pershkrimin",max_length=1000)
     address_line = models.CharField(verbose_name="Adresa", help_text="E nevojeshme",max_length=255)
