@@ -7,12 +7,14 @@
 <div class="container pt-4"> 
     {% if not properties %}
     <div class="col-12">There are currently no prona active</div>
+    <div>{{page.count}}</div> 
       {% else %}
         <div class="album py-5 bg-light"> 
-          {% for property in properties %}  
+            
          <div class="container">
-
+         
         <div class="row">
+          {% for property in page.object_list %}
           <div class="col-md-4 p-0">
             <div class="card mb-4 box-shadow row">
               {% for image in property.property_image.all %}
@@ -122,8 +124,46 @@
           {% endfor %}
         </div>
       </div>
+
       
         {% endif %}
+<!-- 
+        <nav aria-label="...">
+          <ul class="pagination">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active">
+              <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav> -->
+
+        <nav aria-label="...">
+          <ul class="pagination">
+
+        
+          {% if page.has_previous %}
+          <li class="page-item">
+          <a class="page-link" href="{% url 'pronat:properties_list' %}?page={{ page.previous_page_number }}">Previous</a></li>
+          {% endif %}
+
+          {% for i in num_pages %}
+          <li class="page-item">
+            <a class="page-link" href="{% url 'pronat:properties_list' %}?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+          {% endfor %}
+          
+          {% if page.has_next %}
+          <li class="page-item">
+          <a class="page-link" href="{% url 'pronat:properties_list' %}?page={{ page.next_page_number }}">Next</a></li>
+          {% endif %}            
+        </ul>
+      </nav>
 
     {%endblock %}
    
