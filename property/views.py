@@ -62,4 +62,13 @@ def property_detail(request, slug):
     return render(request, 'home/single.html', {"property": property})
 
 def contact_page (request):
-    return render(request, 'contact.html')
+    return render(request, 'home/contact.html')
+
+def aboutus (request):
+    return render(request,'home/about.html')
+
+def politikat_privatesise (request):
+    return render(request,'home/politikat.html')
+
+def provaa(request):
+    return render(request,'home/prova.html')

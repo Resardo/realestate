@@ -1,3 +1,51 @@
 .footer-style{
     color: black;
 }
+
+.navbar.navbar-expand-lg.navbar-dark.bg-dark{
+    height: 80px;
+}
+
+
+.container-fluid .navbar-brand img
+{
+margin: 50px;
+width: 95px;
+height: 70px;
+}
+
+.collapse.navbar-collapse
+{
+    margin: 100px;
+    
+}
+.row.mt-3 .col-md-3.col-lg-4.col-xl-3.mx-auto.mb-4 .text-uppercase.fw-bold.mb-4,
+.col-md-2.col-lg-2.col-xl-2.mx-auto.mb-4 .text-uppercase.fw-bold.mb-4,
+.col-md-3.col-lg-2.col-xl-2.mx-auto.mb-4 .text-uppercase.fw-bold.mb-4,
+.col-md-4.col-lg-3.col-xl-3.mx-auto.mb-md-0.mb-4 .text-uppercase.fw-bold.mb-4
+
+{
+    margin-top: 30px;
+}
+.containerr img{
+margin: 100x;
+width: 150px;
+height: 90px;
+
+}
+.col-md-3.col-lg-4.col-xl-3.mx-auto.mb-4{
+    max-width: fit-content;
+}
+
+@media only screen and (min-width:1000px){
+    .container-fluid{
+        margin: 17px;
+        /* display: block;
+        width: 100%;
+        padding-bottom: 30px; */
+    }
+    .container-fluid .navbar-brand img {
+        margin: 17px;
+    }
+}
+
