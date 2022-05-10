@@ -11,13 +11,14 @@
 {
     position: relative;
     min-width: 100vh;
-    padding: 50px 100px;
+    padding: 70px 100px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: url(https://thumbs.dreamstime.com/b/contact-us-background-businesses-contact-email-contact-call-message-landing-page-background-contact-us-contact-email-contact-131608680.jpg);
+    background: url(https://media.istockphoto.com/photos/email-contact-communication-web-landing-page-cover-page-background-picture-id882222414?k=20&m=882222414&s=170667a&w=0&h=BrzA3vX6Ee8GVTEEZe0pvn_Xzk8Pg2jL54Z8n1yH4vE=);
     background-size: cover;
+    margin-bottom: -50px;
 }
 .contact .content 
 {
@@ -40,7 +41,7 @@
 .container 
 {
     width: 100%;
-    display: flex;
+    /* display: block; */
     justify-content: center;
     align-items: center;
     margin-top: 30px;
@@ -84,6 +85,9 @@
 }
 .contactForm
 {
+    margin-left: auto;
+    margin-right: 50px;
+    margin-top: -360px;
     width: 40%;
     padding: 40px;
     background: #fff;
@@ -143,7 +147,7 @@
     padding: 10px;
     font-size: 18px;
 }
-@media (max-width:991px)
+@media only screen and (max-width:1000px)
 {
     .contact
     {

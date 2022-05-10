@@ -89,14 +89,3 @@ def property_detail(request, slug):
 
     return render(request, 'home/single.html', {"property": property})
 
-def contact_page (request):
-    return render(request, 'contact.html')
-
-
-def paginator(request, properties):
-    properties_paginator = Paginator(properties, 2)
-    page_num= request.GET.get('page')
-    page = properties_paginator.get_page(page_num)
-    num_pages = "a" * page.paginator.num_pages
-    context = {"page" : page, "num_pages" : num_pages}
-    return context
