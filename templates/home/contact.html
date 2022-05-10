@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'core/css/contact.css' %}">
+
+{% endblock %}
+{% block content %}
+
+<section class="contact">
+    <div class="content">
+        <h2>Contact Us</h2>
+        <p> </p>
+
+    </div>
+    <div class="container">
+        <div class="contactInfo">
+            <div class="box">
+                <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="text">
+                    <h3>Address</h3>
+                    <p>Rr: “Myslym Shyri”, Tiranë</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="icon"><i class="fas fa-phone"></i></div>
+                <div class="text">
+                    <h3>Contact Number</h3>
+                    <p>+355 67 300 5050</p>
+                    
+                </div>
+            </div>
+            <div class="box">
+                <div class="icon"><i class="fas fa-envelope"></i></div>
+                <div class="text">
+                    <h3>Email</h3>
+                    <p>info@dominusoft.co</p>
+                </div>
+            </div>
+        </div>
+        <div class="contactForm">
+            <form>
+                <h2>Send Message</h2>
+                <div class="inputBox"> 
+                    <input type="text" name="" required="required">
+                    <span>Full Name</span>            
+                </div>
+                <div class="inputBox"> 
+                    <input type="text" name="" required="required">
+                    <span>Email</span>            
+                </div>
+                <div class="inputBox"> 
+                    <textarea required="required"></textarea>
+                    <span>Message</span>            
+                </div>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      Submit
+                 </button>
+  
+  <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Success !</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                 Thank you for your feedback
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                <!-- <div class="inputBox"> 
+                    <input type="submit" name="" value="Send"  >  
+                           
+                </div> -->
+            </form>
+        </div>
+    </div>
+
+</section>
+{% endblock %}

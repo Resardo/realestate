@@ -2,37 +2,26 @@ from asyncio.windows_events import NULL
 from itertools import product
 from msilib.schema import Property
 from unicodedata import category
-from urllib import request
-from django.http import Http404, HttpRequest
+from django.http import Http404
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, render
 from django.core.paginator import Paginator
 from .models import Apartment, Garage, Land, Store, Villa, Property
 
-# def paginator(properties,request):
-
-#     properties_paginator = Paginator(properties, 2)
-#     page_num= request.GET.get('page')
-#     page = properties_paginator.get_page(page)
-#     num_pages = "a" * page.paginator.num_pages
-#     context = {"page" : page, "num_pages" : num_pages}
-#     return context
-
 def properties_all(request):
     properties = Property.objects.prefetch_related("property_image").filter(is_active=True)
     topProperties=Property.objects.prefetch_related("property_image").all().order_by('-views')
-    lastAdded=Property.objects.prefetch_related("property_image").all().order_by('-created_at')
     print(topProperties)
-    return render(request, "home/index.html", {"properties" : properties, "topProperties" : topProperties, "lastAdded" : lastAdded})
+    return render(request, "home/index.html", {"properties" : properties, "topProperties" : topProperties})
 
 def properties_list(request):
     properties = Property.objects.prefetch_related("property_image").filter(is_active=True)
-
     
     properties_paginator = Paginator(properties, 2)
     page_num= request.GET.get('page')
     page = properties_paginator.get_page(page_num)
     num_pages = "a" * page.paginator.num_pages
+   
     
     return render(request, "home/properties.html", {"properties" : properties, "page" : page, "num_pages" : num_pages})
 
@@ -100,14 +89,12 @@ def property_detail(request, slug):
 
     return render(request, 'home/single.html', {"property": property})
 
-def contact_page (request):
-    return render(request, 'contact.html')
 
-def index(request):
+def contact_page(request):
+    return render(request, 'home/conctact.html')
 
-    if 'q' in request.GET:
-        q = request.GET['q']
-        data =  Property.objects.prefetch_related("property_image").filter(is_active=True, title__icontains=q)
-        context = {"data" : data }
+def aboutus(request):
+    return render(request, 'home/about.html')
 
-    return render (request, 'home/properties.html' , context)
+def politikat_privatesise(request):
+    return render(request, 'home/politikat.html')
