@@ -12,10 +12,12 @@ from .models import Apartment, Garage, Land, Store, Villa, Property
 def properties_all(request):
     properties = Property.objects.prefetch_related("property_image").filter(is_active=True)
     topProperties=Property.objects.prefetch_related("property_image").all().order_by('-views')
+    lastAdded=Property.objects.prefetch_related("property_image").all().order_by('-created_at')
+
     print(topProperties)
     # myFilter = PropertyFilter(request.GET, queryset=properties)
     # properties = myFilter.qs 
-    return render(request, "home/index.html", {"properties" : properties, "topProperties" : topProperties})
+    return render(request, "home/index.html", {"properties" : properties, "topProperties" : topProperties, "lastAdded" : lastAdded})
 
 def properties_list(request):
     properties = Property.objects.prefetch_related("property_image").filter(is_active=True)
