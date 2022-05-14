@@ -163,7 +163,10 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
                   
                     {% endif %}
               </div> -->
-              <div class="container pt-4"> 
+            
+            
+                  
+              <div class="container-fluid pt-4 my-5"> 
                 {% if not properties %}
                 <div class="col-12">There are currently no prona active</div>
                 <div>{{page.count}}</div> 
@@ -172,17 +175,17 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
                         
                      <div class="container">
                      
-                    <div class="owl-carousel owl-theme">
+                    <div class="row">
                       {% for property in lastAdded|slice:":10" %}
-                      <div class="">
-                        <div class="card mb-4 box-shadow">
+                      <div class="col-md-4 p-0">
+                        <div class="card mb-4 box-shadow row">
                           {% for image in property.property_image.all %}
                           {% if image.is_feature%}
                           <img class="card-img-top img-fluid" src="{{ image.image.url }}" alt="{{ image.image.alt_text }}">
                           {% endif %}
                           {% endfor %}
                           <a class="text-dark text-decoration-none" href="{{ property.get_absolute_url }}">
-                            <div class="card-body">
+                            <div class="card-body row">
                               <div class="ps-3">
                                <p class="card-text h4 pt-3">{{  property.title|slice:":50" }}</p>
                               </div>
@@ -284,8 +287,9 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
                     </div>
                   </div>
             
-                  
+                  </div>
                     {% endif %}
+                  </div>
               <hr class="featurette-divider">
 
     <div class="container marketing my-5 ">
