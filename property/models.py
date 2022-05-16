@@ -52,6 +52,7 @@ class Property(models.Model):
 
     district_id = models.ForeignKey(District, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=255, unique=True)
+    property_type=models.CharField(choices=PROPERTY_TYPE, max_length=20)
     title = models.TextField(verbose_name="Titulli", help_text="Vendos titullin e njoftimit", max_length=500)
     description = models.TextField(verbose_name="Pershkrimi", help_text="Vendos pershkrimin",max_length=1000)
     address_line = models.CharField(verbose_name="Adresa", help_text="E nevojeshme",max_length=255)
