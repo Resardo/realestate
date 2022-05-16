@@ -6,13 +6,12 @@ from django.http import Http404
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, render
 from django.core.paginator import Paginator
-<<<<<<< Updated upstream
 from .filters import PropertyFilter
-from .models import Apartment, Garage, Land, Store, Villa, Property
-=======
+
+
 from agent.models import User
 from .models import Apartment, District, Garage, Land, Store, Villa, Property, City
->>>>>>> Stashed changes
+
 
 def properties_all(request):
     properties = Property.objects.prefetch_related("property_image").filter(is_active=True)

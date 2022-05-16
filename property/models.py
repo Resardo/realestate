@@ -53,11 +53,7 @@ class Property(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="agent_of_property")
     district_id = models.ForeignKey(District, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=255, unique=True)
-<<<<<<< Updated upstream
-    property_type=models.CharField(choices=PROPERTY_TYPE, max_length=20)
-=======
     property_type = models.CharField(choices=PROPERTY_TYPE, max_length=20)
->>>>>>> Stashed changes
     title = models.TextField(verbose_name="Titulli", help_text="Vendos titullin e njoftimit", max_length=500)
     description = models.TextField(verbose_name="Pershkrimi", help_text="Vendos pershkrimin",max_length=1000)
     address_line = models.CharField(verbose_name="Adresa", help_text="E nevojeshme",max_length=255)
