@@ -57,19 +57,19 @@
                         <h4>Links</h4>
                         <ul>
                             <li><a href="{% url "property:home_page" %}">Home</a></li>
-                            <li><a href="about">About Us</a></li>
-                            <li><a href="#">affiliate program</a></li>
-                            <li><a href="politikat">Politikat e privatesise</a></li>
+                            <li><a href="{% url "property:aboutus" %}">About Us</a></li>
+                            <li><a href="{% url "property:zyrat" %}">Zyrat</a></li>
+                            <li><a href="{% url "property:politkat" %}">Politikat e privatesise</a></li>
                         </ul>
                     </div>
                     <div class="footer-col">
                         <h4>Properties</h4>
                         <ul>
-                            <li><a href="properties">Apartamentet</a></li>
-                            <li><a href="#">Villa</a></li>
-                            <li><a href="#">Store</a></li>
-                            <li><a href="#">Land</a></li>
-                            <li><a href="#">Garage</a></li>
+                            <li><a href="{% url "property:apartment_all" %}">Apartamentet</a></li>
+                            <li><a href="{% url "property:villa_all" %}">Villa</a></li>
+                            <li><a href="{% url "property:store_all" %}">Store</a></li>
+                            <li><a href="{% url "property:land_all" %}">Land</a></li>
+                            <li><a href="{% url "property:garage_all" %}">Garage</a></li>
                         </ul>
                     </div>
                     <div class="footer-col">

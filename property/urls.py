@@ -15,6 +15,7 @@ urlpatterns = [
     path('store', views.store_all, name="store_all"),
     path('villa', views.villa_all, name="villa_all"),
     path('contact', views.contact_page,name="contact_page"),
-    path('about',views.aboutus,name="aboutus"),
-    path('politikat',views.politikat_privatesise,name="politkat"),
+    path('about', views.aboutus,name="aboutus"),
+    path('politikat', views.politikat_privatesise,name="politkat"),
+    path('zyrat', views.ofice, name="zyrat"),
 ]

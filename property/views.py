@@ -113,3 +113,6 @@ def aboutus(request):
 
 def politikat_privatesise(request):
     return render(request, 'home/politikat.html')
+
+def ofice(request):
+    return render(request, 'home/zyrat.html')
