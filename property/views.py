@@ -114,3 +114,9 @@ def aboutus(request):
 
 def politikat_privatesise(request):
     return render(request, 'home/politikat.html')
+
+def provaa(request):
+    return render(request,'home/base2.html')
+
+def ofice(request):
+    return render(request,'home/zyrat.html')

@@ -17,9 +17,6 @@ urlpatterns = [
     path('contact', views.contact_page,name="contact_page"),
     path('about',views.aboutus,name="aboutus"),
     path('politikat',views.politikat_privatesise,name="politkat"),
-<<<<<<< Updated upstream
-    # path('prova',views.provaa,name="prova"),
-=======
-    #path('prova',views.provaa,name="prova"),
->>>>>>> Stashed changes
+    path('prova',views.provaa,name="prova"),
+    path('zyrat',views.ofice,name="zyrat"),
 ]
