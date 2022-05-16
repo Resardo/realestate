@@ -6,8 +6,13 @@ from django.http import Http404
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, render
 from django.core.paginator import Paginator
+<<<<<<< Updated upstream
 from .filters import PropertyFilter
 from .models import Apartment, Garage, Land, Store, Villa, Property
+=======
+from agent.models import User
+from .models import Apartment, District, Garage, Land, Store, Villa, Property, City
+>>>>>>> Stashed changes
 
 def properties_all(request):
     properties = Property.objects.prefetch_related("property_image").filter(is_active=True)
@@ -93,11 +98,16 @@ def property_detail(request, slug):
                     if queryset.exists():
                         property = get_object_or_404(Villa, slug=slug, is_active=True)
 
-    return render(request, 'home/single.html', {"property": property})
+    #agent = User.objects.get(pk=Property.objects.get(slug=slug).created_by)
+    agent = get_object_or_404(User, pk=property.created_by.pk)
+    print(agent.mobile)
+    district = get_object_or_404(District, pk=property.district_id.pk)
+    city = get_object_or_404(City, pk=district.city_id.pk)
+    return render(request, 'home/single.html', {"property": property, "agent": agent, "district": district, "city": city}) 
 
 
 def contact_page(request):
-    return render(request, 'home/conctact.html')
+    return render(request, 'home/contact.html')
 
 def aboutus(request):
     return render(request, 'home/about.html')

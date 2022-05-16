@@ -1,6 +1,250 @@
 {% extends '../base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'core/css/single.css' %}">
+{% endblock %}
 {% block title%}{{property.title}}{% endblock %}
 {% block content %}
-Titulli: {{property.title}}
-kati: {{property.floor}}
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-8">
+                <p class="h2">{{property.title}}</p>
+                <i class="fa-solid fa-map-location-dot"></i><small class="h6 text-muted"> {{property.address_line}}</small>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <p class="text-muted h3">For {{property.activity}}</p>
+                <i class="h5 fa-solid fa-tag"></i> <small class="h3">{{property.price}} $</small>
+            </div> 
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-9">
+                <div class="row">
+                    {% for image in property.property_image.all %}
+                        {% if image.is_feature %}
+                            <img class="card-img-top img-fluid" src="{{ image.image.url }}" alt="{{ image.image.alt_text }}">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="row">
+                    <p class="h2">Description</p>
+                    <small>{{property.description}}</small>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-4 col-lg-4">
+                        <div class="row">
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <i class="fa-solid fa-maximize h1"></i>   
+                            </div>
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <strong>Siperfaqja:</strong>
+                                <small>{{property.price}}</small>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <i class="fa-solid fa-city h1"></i>  
+                            </div>
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <strong>City:</strong>
+                                <small>{{city}}</small>
+                            </div>
+                        </div>
+
+                        {% if property.apartment.bath_num == 0 or property.apartment.bath_num%}
+                         <div class="row">
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <i class="fa-solid fa-bath h1"></i>   
+                            </div>
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <strong>Toilets:</strong>
+                                <small>{{property.apartment.bath_num}}</small>
+                            </div>
+                        </div>
+                        {% elif property.store.bath_num or property.store.bath_num == 0 %}
+                        <div class="row">
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <i class="fa-solid fa-bath h1"></i>   
+                            </div>
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <strong>Toilets:</strong>
+                                <small>{{property.store.bath_num}}</small>
+                            </div>
+                        </div>
+                        {% elif property.villa.bath_num or property.villa.bath_num == 0 %}
+                        <div class="row">
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <i class="fa-solid fa-bath h1"></i>   
+                            </div>
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <strong>Toilets:</strong>
+                                <small>{{property.villa.bath_num}}</small>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="row">
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <i class="fa-solid fa-file h1"></i>  
+                            </div>
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <strong>Documention:</strong>
+                                <small>{{property.documents}}</small>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-4">        
+                        <div class="row">
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <i class="fa-solid fa-circle-info h1"></i>   
+                            </div>
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <strong>Available:</strong>
+                                {% if property.status %}
+                                <small>Available</small>
+                                {% else %}
+                                <small>Not Available</small>
+                                {% endif %}
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <i class="fa-solid fa-building-wheat h1 "></i>  
+                            </div>
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <strong>Neiborhood:</strong>
+                                <small>{{district}}</small>
+                            </div>
+                        </div> 
+
+                        
+                        {% if property.apartment.room_num or property.apartment.room_num == 0 %}
+                        <div class="row">
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <i class="fa-solid fa-bed h1"></i>   
+                            </div>
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <strong>Bedrooms:</strong>
+                                <small>{{property.apartment.room_num}}</small>
+                            </div>
+                        </div>
+                        {% elif property.villa.room_num or property.villa.room_num == 0 %}
+                        <div class="row">
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <i class="fa-solid fa-bed h1"></i>   
+                            </div>
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <strong>Bedrooms:</strong>
+                                <small>{{property.villa.room_num}}</small>
+                            </div>
+                        </div>
+                        {% endif %}
+                    
+                        <div class="row">
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <i class="fa-solid fa-eye h1"></i>   
+                            </div>
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <strong>Shikimet:</strong>
+                                <small>{{property.views}}</small>
+                            </div>
+                        </div> 
+
+                        
+
+                    </div> 
+                    <div class="col-sm-12 col-md-4 col-lg-4">                      
+                        <div class="row">
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <i class="fa-solid fa-circle-info h1"></i>   
+                            </div>
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <strong>Tipi:</strong>
+                                <small>{{property.property_type}}</small>
+                            </div>
+                        </div> 
+                        {% if property.apartment.floor or property.apartment.floor == 0 %}
+                        <div class="row">
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <i class="fa-solid fa-arrow-right-to-city h1"></i>   
+                            </div>
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <strong>Floor:</strong>
+                                <small>{{property.apartment.floor}}</small>
+                            </div>
+                        </div>
+                        {% elif property.garage.floor or property.garage.floor == 0%}
+                        <div class="row">
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <i class="fa-solid fa-arrow-right-to-city h1"></i>   
+                            </div>
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <strong>Floor:</strong>
+                                <small>{{property.garage.floor}}</small>
+                            </div>
+                        </div>
+                        {% elif  property.store.floor or  property.store.floor == 0%}
+                        <div class="row">
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <i class="fa-solid fa-arrow-right-to-city h1"></i>   
+                            </div>
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <strong>Floor:</strong>
+                                <small>{{property.store.floor}}</small>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if  property.villa.living_room or  property.villa.living_room == 0%}
+                        <div class="row">
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <i class="fa-solid fa-file h1"></i>  
+                            </div>
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <strong>Living room:</strong>
+                                <small>{{property.villa.living_room}}</small>
+                            </div>
+                        </div> 
+                        {% endif %}
+                        <div class="row">
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <i class="fa-solid fa-calendar h1"></i>  
+                            </div>
+                            <div col="col-sm-12 col-md-4 col-lg-6">
+                                <strong>Published:</strong>
+                                <small>{{property.created_at}}</small>
+                            </div>
+                        </div> 
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-1">
+                            <i class="fa-solid fa-location-dot h1 "></i>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-1">
+                            <i><h1>Location:</h1></i>
+                        </div>
+                    </div>
+                    <strong class="h5">City: </strong><h5 class="text-muted">{{city}}<h5>
+                    <strong class="h5">Neiborhood: </strong><h5 class="text-muted">{{district}}<h5>
+                    <strong class="h5">Address: </strong><h5 class="text-muted">{{property.address_line}}<h5>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{agent.image}}" alt="{{agent.alt_text}}">
+                    <div class="card-body">
+                      <h5 class="card-title">{{agent.first_name}} {{agent.last_name}}</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Email: {{agent.email}}</li>
+                      <li class="list-group-item">Phone: {{agent.mobile}}</li>
+                      <li class="list-group-item">Shiko pronat</li>
+                    </ul>
+                  </div> 
+            </div>
+        </div>
+        
+    </div>
+</div>
 {% endblock %}
