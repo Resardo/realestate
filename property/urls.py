@@ -17,5 +17,5 @@ urlpatterns = [
     path('contact', views.contact_page,name="contact_page"),
     path('about',views.aboutus,name="aboutus"),
     path('politikat',views.politikat_privatesise,name="politkat"),
-    path('prova',views.provaa,name="prova"),
+    # path('prova',views.provaa,name="prova"),
 ]
