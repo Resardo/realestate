@@ -18,4 +18,5 @@ urlpatterns = [
     path('about', views.aboutus,name="aboutus"),
     path('politikat', views.politikat_privatesise,name="politkat"),
     path('zyrat', views.ofice, name="zyrat"),
+    path('ourteam', views.agent_all, name="agent_all"),
 ]
