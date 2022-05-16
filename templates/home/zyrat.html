@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% extends 'home/base2.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'core/css/zyrat.css' %}">
+
+{% endblock %}
+{% block content %}
+<section id="facilities">
+    <div class="container">
+        <div class="title">
+            <h1>Our Offices</h1>
+            <p> </p>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <img src="static/images/office1.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title"> <i class="fa-solid fa-location-dot"></i> Rr. Myslym Shyri,Tirane</h5>
+                        <p class="card-text">Sone quick exanple text to build on the card title and make up the bulk of the card's content.</p>
+                        
+                    </div>
+                 
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <img src="static/images/office2.jpg" class="card-img-top">
+                    <div class="card-body" >
+                        <h5 class="card-title"> <i class="fa-solid fa-location-dot"></i> Bulevardi Zogu I,Tirane </h5>
+                        <p class="card-text">Some quick exanple text to bui ld on the card title and make up the bulk of the card's content.</p>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <img src="static/images/office3.jpg" class="card-img-top">
+                    <div class="card-body" >
+                        <h5 class="card-title"><i class="fa-solid fa-location-dot"></i> Ish Blloku,Tirane</h5>
+                        <p class="card-text">Some quick exanple text to bui ld on the card title and make up the bulk of the card's content.</p>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+</section>
+{% endblock %}

@@ -91,10 +91,16 @@ def property_detail(request, slug):
 
 
 def contact_page(request):
-    return render(request, 'home/conctact.html')
+    return render(request, 'home/contact.html')
 
 def aboutus(request):
     return render(request, 'home/about.html')
 
 def politikat_privatesise(request):
     return render(request, 'home/politikat.html')
+
+def provaa(request):
+    return render(request,'home/base2.html')
+
+def ofice(request):
+    return render(request,'home/zyrat.html')
