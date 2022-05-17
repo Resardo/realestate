@@ -22,14 +22,14 @@
     font-size: 18px;
 }
 .card-body {
-    box-shadow: 0 0 20px 7px #333030;
+    box-shadow: 0 0 20px 7px #c1bbbb;
 }
 .card {
     margin: 20px 10px;
 
 }
 .card-body a {
-    color: rgb(196, 40, 40);
+    color: rgb(0, 0, 0);
     text-decoration: none;
     font-size: 15px;
     margin-top: auto;
