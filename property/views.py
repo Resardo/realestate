@@ -6,8 +6,12 @@ from django.http import Http404
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, render
 from django.core.paginator import Paginator
-from .filters import PropertyFilter,PropertyFilter2
-from .models import Apartment, Garage, Land, Store, Villa, Property
+from .filters import PropertyFilter
+
+
+from agent.models import User
+from .models import Apartment, District, Garage, Land, Store, Villa, Property, City
+
 
 def properties_all(request):
     properties = Property.objects.prefetch_related("property_image").filter(is_active=True)
@@ -15,9 +19,9 @@ def properties_all(request):
     lastAdded=Property.objects.prefetch_related("property_image").all().order_by('-created_at')
 
     print(topProperties)
-    myFilter = PropertyFilter2(request.GET, queryset=properties) 
-    properties = myFilter.qs
-    return render(request, "home/index.html", {"properties" : properties, "topProperties" : topProperties, "lastAdded" : lastAdded, "myFilter" : myFilter})
+    # myFilter = PropertyFilter(request.GET, queryset=properties)
+    # properties = myFilter.qs 
+    return render(request, "home/index.html", {"properties" : properties, "topProperties" : topProperties, "lastAdded" : lastAdded})
 
 def properties_list(request):
     properties = Property.objects.prefetch_related("property_image").filter(is_active=True)
@@ -93,14 +97,26 @@ def property_detail(request, slug):
                     if queryset.exists():
                         property = get_object_or_404(Villa, slug=slug, is_active=True)
 
-    return render(request, 'home/single.html', {"property": property})
+    #agent = User.objects.get(pk=Property.objects.get(slug=slug).created_by)
+    agent = get_object_or_404(User, pk=property.created_by.pk)
+    print(agent.mobile)
+    district = get_object_or_404(District, pk=property.district_id.pk)
+    city = get_object_or_404(City, pk=district.city_id.pk)
+    return render(request, 'home/single.html', {"property": property, "agent": agent, "district": district, "city": city}) 
 
 
 def contact_page(request):
-    return render(request, 'home/conctact.html')
+    return render(request, 'home/contact.html')
 
 def aboutus(request):
     return render(request, 'home/about.html')
 
 def politikat_privatesise(request):
     return render(request, 'home/politikat.html')
+
+def ofice(request):
+    return render(request, 'home/zyrat.html')
+
+def agent_all(request):
+    agents = User.objects.all()
+    return render(request, 'home/ourteam.html', {"agents": agents})

@@ -6,7 +6,7 @@ from django.contrib.auth.admin import UserAdmin
 
 class UserAdminConfig(UserAdmin):
     model = User
-    serach_fields = ('email', 'first_name', 'last_name',)
+    serach_fields = ('email', 'first_name', 'last_name', 'slug')
     ordering = ('-created',)
     list_display = ('first_name', 'email', 'is_staff', 'is_active',)
 
@@ -18,7 +18,7 @@ class UserAdminConfig(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'first_name', 'last_name', 'password1', 'password2', 'is_active', 'is_staff', 'is_superuser', 'mobile', 'image')}
+            'fields': ('email', 'first_name', 'last_name','slug', 'password1', 'password2', 'is_active', 'is_staff', 'is_superuser', 'mobile', 'image')}
         ),
     )
 

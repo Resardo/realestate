@@ -1,3 +1,4 @@
+from multiprocessing import Condition
 from tkinter import CASCADE
 from django.db import models
 from django.urls import reverse
@@ -49,10 +50,10 @@ class District(models.Model):
 
 
 class Property(models.Model):
-
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="agent_of_property")
     district_id = models.ForeignKey(District, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=255, unique=True)
-    property_type=models.CharField(choices=PROPERTY_TYPE, max_length=20)
+    property_type = models.CharField(choices=PROPERTY_TYPE, max_length=20)
     title = models.TextField(verbose_name="Titulli", help_text="Vendos titullin e njoftimit", max_length=500)
     description = models.TextField(verbose_name="Pershkrimi", help_text="Vendos pershkrimin",max_length=1000)
     address_line = models.CharField(verbose_name="Adresa", help_text="E nevojeshme",max_length=255)
@@ -89,8 +90,10 @@ class Apartment(Property):
         verbose_name_plural = "Apartamentet"
 
 
+
 class Villa(Property):
     property_id = models.OneToOneField(Property, on_delete=models.CASCADE, parent_link=True, primary_key=True)
+    living_room = models.IntegerField(default=1)
     floors = models.IntegerField(default=1)
     room_num = models.IntegerField(default=1)
     bath_num = models.IntegerField(default=1)
@@ -111,7 +114,6 @@ class Store(Property):
 
 class Land(Property):
     property_id = models.OneToOneField(Property, on_delete=models.CASCADE, parent_link=True, primary_key=True)
-
     class Meta: 
         verbose_name = "Toke"
         verbose_name_plural = "Tokat"
