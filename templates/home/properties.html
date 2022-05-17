@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% extends 'home/base2.html' %}
+{% extends '../base.html' %}
 {%load static%}
 {% block title%}Home{%endblock%}
 {% block css %}<link rel="stylesheet" href="{% static 'core/css/properties.css' %}">{% endblock %}
@@ -147,9 +147,9 @@
         </nav> -->
 
         
-<div>
+<div class="container-fluid">
   {% load crispy_forms_tags %}
-  <form class="d-flex" method="get" action="{% url "property:properties_list" %}">
+  <form class="d-flex justify-content-evenly" method="get" action="{% url 'pronat:properties_list' %}">
     {{myFilter.form|crispy}}
     <!-- <input class="form-control me-2" name = "q" type="search" placeholder="Search" aria-label="Search"> -->
     <button class="btn btn-outline-success" type="submit">Search</button>
