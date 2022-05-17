@@ -1,6 +1,7 @@
 from gzip import READ
 from django.db import models
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager, PermissionsMixin, Permission)
+from django.urls import reverse
 
 
 
@@ -68,6 +69,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         db_table = "agent_user"
         verbose_name = "Agent"
         verbose_name_plural = "Agents"
+    
+    def get_absolute_url(self):
+        return reverse('agent:agent_properties', args=[self.slug])
 
     def __str__(self):
         return self.first_name
