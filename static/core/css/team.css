@@ -36,3 +36,10 @@
     font-weight: 600;
 
 }
+.row h1{
+    text-align: center;
+}
+.col-md-4 .card img {
+    width: 344px;
+    height: 300px;
+}

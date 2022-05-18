@@ -117,6 +117,5 @@ def politikat_privatesise(request):
 def ofice(request):
     return render(request, 'home/zyrat.html')
 
-def agent_all(request):
-    agents = User.objects.all()
-    return render(request, 'home/ourteam.html', {"agents": agents})
+def team(request):
+    return render(request, 'home/team.html')

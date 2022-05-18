@@ -37,10 +37,10 @@
             <div class="navbar-links">
                 <ul>
                     <li><a href="{% url "property:home_page" %}">Home</a></li>
-                    <li><a href="properties">Properties</a></li>
-                    <li><a href="contact">Contact Us</a></li>
+                    <li><a href="{% url "property:properties_list" %}">Properties</a></li>
+                    <li><a href="{% url "property:contact_page" %}">Contact Us</a></li>
                     <li><a href="#">home</a></li>
-                    <li><a href="{% url "property:agent_all" %}">Our Team</a></li>
+                    <li><a href="{% url "agent:agent_all" %}">Our Team</a></li>
                     
                     
                 </ul>
@@ -76,10 +76,10 @@
                         <h4>About</h4>
                         <ul>
                             
-                            <li><a href="contact"><i class="fa-solid fa-phone"></i> +355 67 300 5050</a></li>
-                            <li><a href="contact"><i class="fa-solid fa-at"></i> info@dominusoft.co</a></li>
-                            <li><a href=""><i class="fa-solid fa-location-dot"></i> Rr: “Myslym Shyri”, Tiranë</a></li>
-                            <li><a href=""><i class="fa-solid fa-copyright"></i> Dominusoft</a></li>
+                            <li><a href="{% url "property:contact_page" %}"><i class="fa-solid fa-phone"></i> +355 67 300 5050</a></li>
+                            <li><a href="{% url "property:contact_page" %}"><i class="fa-solid fa-at"></i> info@dominusoft.co</a></li>
+                            <li><a href="{% url "property:contact_page" %}"><i class="fa-solid fa-location-dot"></i> Rr: “Myslym Shyri”, Tiranë</a></li>
+                            <li><a href="{% url "property:contact_page" %}"><i class="fa-solid fa-copyright"></i> Dominusoft</a></li>
                
                         </ul>
                     </div>
