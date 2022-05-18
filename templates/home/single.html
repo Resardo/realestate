@@ -231,20 +231,21 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-3">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="media/{{agent.image}}" alt="{{agent.alt_text}}">
-                    <div class="card-body">
-                      <h5 class="card-title">{{agent.first_name}} {{agent.last_name}}</h5>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item">Email: {{agent.email}}</li>
-                      <li class="list-group-item">Phone: {{agent.mobile}}</li>
-                      <a href="{{agent.get_absolute_url}}"><li class="list-group-item">Shiko pronat</li></a>
-                    </ul>
-                  </div> 
+                <div class="card text-center">
+                    <img src="{{agent.image.url}}" alt="{{agent.alt_text}}"class="card-img-top">
+                      <div class="card-body">
+                          <h5 class="card-title">  {{agent.first_name}} {{agent.last_name}}</h5>
+                          <h5 class="card-title"> <i class="fa-solid fa-square-phone-flip"></i> {{agent.mobile}}</h5>
+                          <h5 class="card-title"> <i class="fa-solid fa-envelope"></i> {{agent.email}}</h5>
+                          <a href="{{agent.get_absolute_url}}" class="btn btn-primary">Go somewhere</a>
+                          
+                          
+                      </div>
+                   
+                  </div>
             </div>
         </div>
-        
+        </div>
     </div>
 </div>
 {% endblock %}

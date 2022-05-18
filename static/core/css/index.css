@@ -17,4 +17,7 @@
 .new-img{
  height: 550px;
 }
+.carousel-inner, .carousel-inner img{
+  object-fit: cover;
+}
 
