@@ -1,4 +1,7 @@
-from dataclasses import fields
+from cProfile import label
+from dataclasses import field, fields
+from re import L
+from turtle import title
 from unicodedata import name
 
 import django_filters
@@ -9,15 +12,22 @@ from .models import*
 
 
 class PropertyFilter(django_filters.FilterSet):
-    price = RangeFilter(field_name="price")
-    class Meta:
-        model = Property
-        fields = '__all__'
-        exclude = ['description','addressS_line', 'area', 'views', 'documents', 'status', 'activity', 'updated_at','is_active','price' ]
+    cmimi = RangeFilter(field_name="price",label="Cmimi")
+    city = django_filters.ModelChoiceFilter(queryset=City.objects.all(),label='Qyteti')
+    district = django_filters.ModelChoiceFilter(queryset=District.objects.filter(City,city_id=City.id), label="Zona")
+    sip = RangeFilter(field_name="area",label="Siperfaqja",lookup_expr='gte')
+   
 
-class PropertyFilter2(django_filters.FilterSet):
     
     class Meta:
         model = Property
-        fields = '__all__'
-        exclude = ['slug','created_at','description','address_line', 'area', 'views', 'documents', 'status', 'activity', 'updated_at','is_active','price' ]
+        fields = ['city','district','title','cmimi','sip','activity']
+
+class PropertyFilter2(django_filters.FilterSet):
+    city = django_filters.ModelChoiceFilter(queryset=City.objects.all(),label='city')
+    district = django_filters.ModelChoiceFilter(queryset=District.objects.all(), label="Zona")
+    titulli = django_filters.CharFilter(field_name='title',label='Keyword')
+    class Meta:
+        model = Property
+        fields = ['city','titulli','district']
+       
