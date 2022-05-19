@@ -16,6 +16,7 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 
 {%block content%}
 
+
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -69,7 +70,14 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 
 
 
-    <div class="container-fluid pt-4 my-5 "> 
+<div class="container-fluid py-5">
+  {% load crispy_forms_tags %}
+  <form class="d-flex justify-content-evenly" method="get" action="{% url 'pronat:properties_list' %}">
+    {{myFilter2.form|crispy}}
+    <!-- <input class="form-control me-2" name = "q" type="search" placeholder="Search" aria-label="Search"> -->
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+  </div>
       
           
         <hr class="featurette-divider">

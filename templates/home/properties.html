@@ -5,6 +5,15 @@
 {% block css %}<link rel="stylesheet" href="{% static 'core/css/properties.css' %}">{% endblock %}
 {%block content%}
 
+<div class="container-fluid py-5">
+  {% load crispy_forms_tags %}
+  <form class="d-flex justify-content-evenly" method="get" action="{% url 'pronat:properties_list' %}">
+    {{myFilter.form|crispy}}
+    <!-- <input class="form-control me-2" name = "q" type="search" placeholder="Search" aria-label="Search"> -->
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+  </div>
+
 <div class="container pt-4"> 
     {% if not properties %}
     <div class="col-12">There are currently no prona active</div>
@@ -147,14 +156,14 @@
         </nav> -->
 
         
-<div>
+<!-- <div class="container-fluid">
   {% load crispy_forms_tags %}
-  <form class="d-flex" method="get" action="{% url "property:properties_list" %}">
+  <form class="d-flex justify-content-evenly" method="get" action="{% url 'pronat:properties_list' %}">
     {{myFilter.form|crispy}}
-    <!-- <input class="form-control me-2" name = "q" type="search" placeholder="Search" aria-label="Search"> -->
+     <input class="form-control me-2" name = "q" type="search" placeholder="Search" aria-label="Search"> 
     <button class="btn btn-outline-success" type="submit">Search</button>
   </form>
-  </div>
+  </div> -->
 
         <nav aria-label="...">
           <ul class="pagination">

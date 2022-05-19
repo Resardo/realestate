@@ -1,11 +1,14 @@
-from argparse import Action
 from cProfile import label
-from dataclasses import fields
-from random import choices
-from xml.etree.ElementInclude import include
-from django import forms
+from dataclasses import field, fields
+
 
 import django_filters
+from django_filters import DateFilter,RangeFilter
+
+from argparse import Action
+from cProfile import label
+
+
 
 
 from .models import *
@@ -21,7 +24,10 @@ ACTION_OPTION = (
         ("Rent", "Qera")
     )
 
+
+
 class PropertyFilter(django_filters.FilterSet):
+
     city = django_filters.ModelChoiceFilter(queryset=City.objects.all(), label="City")
     district = django_filters.ModelChoiceFilter(queryset=District.objects.all(), label="District")
     title = django_filters.CharFilter(lookup_expr='icontains', label="Title")
@@ -38,3 +44,10 @@ class PropertyFilter(django_filters.FilterSet):
         #label = ['City', 'District', 'Veprimi', 'Lloji prones', 'Titulli', 'Cmimi min.', 'Cmimi max.', 'Siperfaqja min.', 'Siperfaqja max.']
         exclude = ['description','addres_line', 'views', 'documents', 'status', 'updated_at','is_active',]
 
+class PropertyFilter2(django_filters.FilterSet):
+    city = django_filters.ModelChoiceFilter(queryset=City.objects.all(),label='city')
+    district = django_filters.ModelChoiceFilter(queryset=District.objects.all(), label="Zona")
+    titulli = django_filters.CharFilter(field_name='title',label='Keyword')
+    class Meta:
+        model = Property
+        fields = ['city','titulli','district']

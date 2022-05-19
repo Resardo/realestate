@@ -7,7 +7,7 @@ from django.http import Http404
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, render
 from django.core.paginator import Paginator
-from .filters import PropertyFilter
+from .filters import PropertyFilter,PropertyFilter2
 
 
 from agent.models import User
@@ -16,13 +16,15 @@ from .models import Apartment, District, Garage, Land, Store, Villa, Property, C
 
 def properties_all(request):
     properties = Property.objects.prefetch_related("property_image").filter(is_active=True)
+    myFilter2 = PropertyFilter2(request.GET, queryset=properties) 
+    properties = myFilter2.qs
     topProperties=Property.objects.prefetch_related("property_image").all().order_by('-views')
     lastAdded=Property.objects.prefetch_related("property_image").all().order_by('-created_at')
 
     print(topProperties)
     # myFilter = PropertyFilter(request.GET, queryset=properties)
     # properties = myFilter.qs 
-    return render(request, "home/index.html", {"properties" : properties, "topProperties" : topProperties, "lastAdded" : lastAdded})
+    return render(request, "home/index.html", {"properties" : properties, "topProperties" : topProperties, "lastAdded" : lastAdded, "myFilter2":myFilter2})
 
 def properties_list(request):
     properties = Property.objects.prefetch_related("property_image").filter(is_active=True)
