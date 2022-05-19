@@ -2,6 +2,7 @@ from asyncio.windows_events import NULL
 from itertools import product
 from msilib.schema import Property
 from unicodedata import category
+from django import views
 from django.http import Http404
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, render
@@ -98,6 +99,10 @@ def property_detail(request, slug):
                     queryset = Villa.objects.filter(slug=slug, is_active=True)
                     if queryset.exists():
                         property = get_object_or_404(Villa, slug=slug, is_active=True)
+                    else:
+                        queryset = Garage.objects.filter(slug=slug, is_active=True)
+                        if queryset.exists():
+                            property = get_object_or_404(Garage, slug=slug, is_active=True)
 
     #agent = User.objects.get(pk=Property.objects.get(slug=slug).created_by)
     agent = get_object_or_404(User, pk=property.created_by.pk)
