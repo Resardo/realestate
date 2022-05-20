@@ -42,21 +42,22 @@
             <form>
                 <h2>Send Message</h2>
                 <div class="inputBox"> 
-                    <input type="text" name="" required="required">
+                    <input type="text" name="" required>
                     <span>Full Name</span>            
                 </div>
                 <div class="inputBox"> 
-                    <input type="text" name="" required="required">
+                    <input type="email" name="" required>
                     <span>Email</span>            
                 </div>
                 <div class="inputBox"> 
-                    <textarea required="required"></textarea>
+                    <textarea required></textarea>
                     <span>Message</span>            
                 </div>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                {% comment %} <input type="submit" > {% endcomment %}
+                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                       Submit
-                 </button>
+                 </button> 
   
   <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -13,6 +13,13 @@ margin: 50px;
 width: 95px;
 height: 70px;
 }
+.card-img-top{
+    position: absolute;
+}
+
+.container { position: relative; }
+.container img { display: block; }
+.container .fa-ban { position: absolute; bottom:0; right:0; }
 
 .collapse.navbar-collapse
 {

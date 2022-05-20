@@ -28,8 +28,8 @@ ACTION_OPTION = (
 
 class PropertyFilter(django_filters.FilterSet):
 
-    city = django_filters.ModelChoiceFilter(queryset=City.objects.all(), label="City")
-    district = django_filters.ModelChoiceFilter(queryset=District.objects.all(), label="District")
+    city = django_filters.ModelChoiceFilter(queryset=City.objects.all(), label="City",field_name='district_id__city_id')
+    district = django_filters.ModelChoiceFilter(queryset=District.objects.all(), label="District", field_name='district_id')
     title = django_filters.CharFilter(lookup_expr='icontains', label="Title")
     price__gt = django_filters.NumberFilter(field_name='price', lookup_expr='gt', label="Price min.")
     price__lt = django_filters.NumberFilter(field_name='price', lookup_expr='lt', label="Price max.")
@@ -44,10 +44,10 @@ class PropertyFilter(django_filters.FilterSet):
         #label = ['City', 'District', 'Veprimi', 'Lloji prones', 'Titulli', 'Cmimi min.', 'Cmimi max.', 'Siperfaqja min.', 'Siperfaqja max.']
         exclude = ['description','addres_line', 'views', 'documents', 'status', 'updated_at','is_active',]
 
-class PropertyFilter2(django_filters.FilterSet):
-    city = django_filters.ModelChoiceFilter(queryset=City.objects.all(),label='city')
-    district = django_filters.ModelChoiceFilter(queryset=District.objects.all(), label="Zona")
-    titulli = django_filters.CharFilter(field_name='title',label='Keyword')
-    class Meta:
-        model = Property
-        fields = ['city','titulli','district']
+# class PropertyFilter2(django_filters.FilterSet):
+#     city = django_filters.ModelChoiceFilter(queryset=City.objects.all(),label='city')
+#     district = django_filters.ModelChoiceFilter(queryset=District.objects.all(), label="Zona")
+#     titulli = django_filters.CharFilter(field_name='title',label='Keyword')
+#     class Meta:
+#         model = Property
+#         fields = ['city','titulli','district']

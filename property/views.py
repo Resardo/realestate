@@ -7,7 +7,7 @@ from django.http import Http404
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, render
 from django.core.paginator import Paginator
-from .filters import PropertyFilter,PropertyFilter2
+from .filters import PropertyFilter
 
 
 from agent.models import User
@@ -15,22 +15,20 @@ from .models import Apartment, District, Garage, Land, Store, Villa, Property, C
 
 
 def properties_all(request):
-    properties = Property.objects.prefetch_related("property_image").filter(is_active=True)
-    myFilter2 = PropertyFilter2(request.GET, queryset=properties) 
-    properties = myFilter2.qs
-    topProperties=Property.objects.prefetch_related("property_image").all().order_by('-views')
+    properties = Property.objects.prefetch_related("property_image","agent_of_property").select_related("created_by").filter(is_active=True)
+    topProperties=Property.objects.prefetch_related("property_image").select_related("created_by").all().order_by('-views')
     lastAdded=Property.objects.prefetch_related("property_image").all().order_by('-created_at')
 
     print(topProperties)
     # myFilter = PropertyFilter(request.GET, queryset=properties)
     # properties = myFilter.qs 
-    return render(request, "home/index.html", {"properties" : properties, "topProperties" : topProperties, "lastAdded" : lastAdded, "myFilter2":myFilter2})
+    return render(request, "home/index.html", {"properties" : properties, "topProperties" : topProperties, "lastAdded" : lastAdded})
 
 def properties_list(request):
-    properties = Property.objects.prefetch_related("property_image").filter(is_active=True)
+    properties = Property.objects.prefetch_related("property_image").select_related("created_by").filter(is_active=True)
     myFilter = PropertyFilter(request.GET, queryset=properties) 
     properties = myFilter.qs
-    properties_paginator = Paginator(properties, 2)
+    properties_paginator = Paginator(properties, 6)
     page_num= request.GET.get('page')
     page = properties_paginator.get_page(page_num)
     num_pages = "a" * page.paginator.num_pages
@@ -39,7 +37,7 @@ def properties_list(request):
     return render(request, "home/properties.html", {"properties" : properties, "page" : page, "num_pages" : num_pages, "myFilter" : myFilter})
 
 def land_all(request):
-    properties = Land.objects.prefetch_related("property_image").filter(is_active=True)
+    properties = Land.objects.prefetch_related("property_image").select_related("created_by").filter(is_active=True)
     properties_paginator = Paginator(properties, 2)
     page_num= request.GET.get('page')
     page = properties_paginator.get_page(page_num)
@@ -47,7 +45,7 @@ def land_all(request):
     return render(request, "home/properties.html", {"properties" : properties, "page" : page, "num_pages" : num_pages})
 
 def store_all(request):
-    properties = Store.objects.prefetch_related("property_image").filter(is_active=True)
+    properties = Store.objects.prefetch_related("property_image").select_related("created_by").filter(is_active=True)
     properties_paginator = Paginator(properties, 2)
     page_num= request.GET.get('page')
     page = properties_paginator.get_page(page_num)
@@ -55,7 +53,7 @@ def store_all(request):
     return render(request, "home/properties.html", {"properties" : properties, "page" : page, "num_pages" : num_pages})
 
 def garage_all(request):
-    properties = Garage.objects.prefetch_related("property_image").filter(is_active=True)
+    properties = Garage.objects.prefetch_related("property_image").select_related("created_by").filter(is_active=True)
     properties_paginator = Paginator(properties, 2)
     page_num= request.GET.get('page')
     page = properties_paginator.get_page(page_num)
@@ -63,7 +61,7 @@ def garage_all(request):
     return render(request, "home/properties.html", {"properties" : properties, "page" : page, "num_pages" : num_pages})
 
 def villa_all(request):
-    properties = Villa.objects.prefetch_related("property_image").filter(is_active=True)
+    properties = Villa.objects.prefetch_related("property_image").select_related("created_by").filter(is_active=True)
     properties_paginator = Paginator(properties, 2)
     page_num= request.GET.get('page')
     page = properties_paginator.get_page(page_num)
@@ -71,7 +69,7 @@ def villa_all(request):
     return render(request, "home/properties.html", {"properties" : properties, "page" : page, "num_pages" : num_pages})
 
 def apartment_all(request):
-    properties = Apartment.objects.prefetch_related("property_image").filter(is_active=True)
+    properties = Apartment.objects.prefetch_related("property_image").select_related("created_by").filter(is_active=True)
     properties_paginator = Paginator(properties, 2)
     page_num= request.GET.get('page')
     page = properties_paginator.get_page(page_num)
@@ -106,7 +104,9 @@ def property_detail(request, slug):
 
     #agent = User.objects.get(pk=Property.objects.get(slug=slug).created_by)
     agent = get_object_or_404(User, pk=property.created_by.pk)
-    print(agent.mobile)
+    m = property.views 
+    m = m + 1
+    Property.objects.filter(pk=property.pk).update(views=m)
     district = get_object_or_404(District, pk=property.district_id.pk)
     city = get_object_or_404(City, pk=district.city_id.pk)
     return render(request, 'home/single.html', {"property": property, "agent": agent, "district": district, "city": city}) 

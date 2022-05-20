@@ -5,9 +5,9 @@
 {% endblock %}
 {% block title%}{{property.title}}{% endblock %}
 {% block content %}
-<div class="container-fluid">
-    <div class="container">
-        <div class="row">
+<div class="container-fluid mt-5">
+    <div class="container my-5">
+        <div class="row mb-5">
             <div class="col-sm-12 col-md-6 col-lg-8">
                 <p class="h2">{{property.title}}</p>
                 <i class="fa-solid fa-map-location-dot"></i><small class="h6 text-muted"> {{property.address_line}}</small>
@@ -18,18 +18,37 @@
             </div> 
         <div class="row">
             <div class="col-sm-12 col-md-6 col-lg-9">
-                <div class="row">
+                <div class="row my-5">
                     {% for image in property.property_image.all %}
+                    <div class="col-12 col-md-6 col-lg-3">
+                    <img class=" new-img img-fluid w-100" src="{{image.image.url}}" alt="" data-bs-toggle="modal" data-bs-target="#v{{image.pk}}">
+                    <div class="modal fade" id="v{{image.pk}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img class=" new-img img-fluid w-100" src="{{image.image.url}}">
+                            </div>
+                          </div>
+                        </div>
+                  </div>  
+                </div>
+                  {% endfor %}
+                    {% comment %} {% for image in property.property_image.all %}
                         {% if image.is_feature %}
                             <img class="card-img-top img-fluid" src="{{ image.image.url }}" alt="{{ image.image.alt_text }}">
                         {% endif %}
-                    {% endfor %}
+                    {% endfor %} {% endcomment %}
                 </div>
-                <div class="row">
+                <hr class="border-primary border-3 opacity-75">
+                <div class="row pt-2 mb-3">
                     <p class="h2">Description</p>
                     <small>{{property.description}}</small>
                 </div>
-                <div class="row">
+                <hr class="border-primary border-3 opacity-75">
+                <div class="row pt-3">
                     <div class="col-sm-12 col-md-4 col-lg-4">
                         <div class="row">
                             <div col="col-sm-12 col-md-4 col-lg-6">
@@ -216,7 +235,7 @@
                         </div> 
                     </div> 
                 </div>
-                <div class="row">
+                <div class="row mt-5">
                     <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-1">
                             <i class="fa-solid fa-location-dot h1 "></i>
@@ -225,9 +244,9 @@
                             <i><h1>Location:</h1></i>
                         </div>
                     </div>
-                    <strong class="h5">City: </strong><h5 class="text-muted">{{city}}<h5>
-                    <strong class="h5">Neiborhood: </strong><h5 class="text-muted">{{district}}<h5>
-                    <strong class="h5">Address: </strong><h5 class="text-muted">{{property.address_line}}<h5>
+                    <strong class="h5">City: </strong><small class="text-muted h5">{{city}}</small>
+                    <strong class="h5">Neiborhood: </strong><small class="text-muted h5">{{district}}</small>
+                    <strong class="h5">Address: </strong><small class="text-muted h5">{{property.address_line}}</small>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-3">
@@ -237,7 +256,7 @@
                           <h5 class="card-title">  {{agent.first_name}} {{agent.last_name}}</h5>
                           <h5 class="card-title"> <i class="fa-solid fa-square-phone-flip"></i> {{agent.mobile}}</h5>
                           <h5 class="card-title"> <i class="fa-solid fa-envelope"></i> {{agent.email}}</h5>
-                          <a href="{{agent.get_absolute_url}}" class="btn btn-primary">Go somewhere</a>
+                          <a href="{{agent.get_absolute_url}}" class="btn btn-primary">Look Properties</a>
                           
                           
                       </div>
@@ -249,3 +268,5 @@
     </div>
 </div>
 {% endblock %}
+                          
+                        
